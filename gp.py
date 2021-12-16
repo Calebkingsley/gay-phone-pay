@@ -1,66 +1,119 @@
-class Google_pay:                                                                                   
-    
-    def __init__(self,Phone_number,Name):                                                                  
+class google_pay: 
+    def __init__(self):
+
+        print("Welcome to gpay")
         
-        self.mobile=Phone_number
-        self.name=Name
+        self.__username = str(input("Enter name : "))
+        if type(self.__username) == str:
+           print("Name verified sucessfully \n")
+        else:
+            raise TypeError("Invalid name or check your name once again and try again")
         
-    def open_gpay(self):
-        print("Google Pay")
-        
-    def mobile_verification(self):
-        if (len(self.mobile)==10):
-            if type(self.mobile) == str:                                                                            
-                print("phone number verified")
+    def check_mobilenumber(self):
+        self.__usernumber = input("Enter Mobile Number : ")
+        if type(self.__usernumber)==str:
+            if len(self.__usernumber)==10:
+                print(self.__usernumber,)
+                print("Mobile number verified sucessfully \n")
             else:
-                raise TypeError("the phone numbers should only be in integer format ")
+                raise TypeError("Check your mobile number : ")
         else:
-            raise ValueError("the phone number should not be grater than or lesser than 10")
-        
-    def name_verification(self):
-        if type(self.name) == str:
-            if len(self.name) <= 20:                                                                                 
-                print("name verified")
-            else:
-                raise ValueError("The name should contain lesser than or equal to 20 letters")
-        else:
-            raise TypeError("The name should contain string characters only")
-
-    def otp_verification(self,code,otp):
-        if(otp==code):
-            print("otp verified")
-        else:
-            raise ValueError("The otp you are entered is not correct")
-
-
-    def PanCard_Verification(self):
-        self.pan_number="HUTREI2345"
-        if (len(self.pan_number) == 10):
-            print("pan card verified")
-        else:
-            raise ValueError("The entered number is a Inavlid Pan_number")
-
-    def Bank_verification(self):
-        self.Account=[]
-        self.Account_number=9874269845
-        self.Account.append(self.Account_number)                                                                     
-        print(self.Account)
-        print("Bank account Verified")
-
+            raise ValueError("Invalid Type check your Mobile name and Try Again")
     
+    def check_upi(self):
+        self.__upi = input("Enter your upi id :")
+        if type(self.__upi) == str:
+            if len(self.__upi) < 16:
+                print("your Upi id verified sucessfully \n")
+                
+            else:
+                raise TypeError("check your Upi")
+        else:
+            raise ValueError("Invalid upi")
 
-    def set_Pin(self,number):
-        self.pin=number
+class bank(google_pay):
+    def __init__(self):
         
-        if (len(self.pin)==4 or len(self.pin) ==6):
-            print("your pin is successfully created")
+        print("welcome!")
+        
+    def check_userbank(self):
+        
+        self.__userbank = int(input("Enter your bank name"))
+        if self.userbank==str:
+            print("this is a valid bank")
         else:
-            raise ValueError("the entered Pin number is not valid")
+            print("this is a invalid bank)
+            
+            
+        self.__useraccno = int(input("Enter Account number"))
+        if len (self.__useraccno) <=12:
+            print("Succesfully Verified !!")
+                  
+        else:
+            raise TypeError("Please Check your bank account number")
+        
+    def pin_creation(self):
+        self.__pin = int(input("Set up a 4 digit upi pin "))
+        if len(self.__pin) == 6:
+            self.__repin = input("re enter pin")
+            if self.__pin==self.__repin:
+                print("Your Pin Setup Sucessful")
+            else:
+                raise TypeError("Incorrect pin ,Please Try again")
+        else:
+            print("Try again!")
 
-    def Enter_your_Pin(self,match,pin):
-        self.match=match
-        self.pin=pin
-        if self.match==self.pin:
-            print("Finished")
+class userdata(bank):
+    def __init__(self):
+            self.__alldata=[self.__username,self.__usernumber,self.__upi,self.__userbank,self.__useraccnos,self.__pin]
+            print(self.__alldata)
+            
+class payment(bank):
+    def __init__(self):
+        print("LETS START YOUR TRANSACTION")
+    def r_data(self,ifsc):
+        self.__rname = input("Enter Reciver's Name : ")
+        if type(self.__rname) == str:
+                self.__bankname= input("Enter Receiver's Bank :")
+                
+                self.__ifsccode = "str"
+                print ("your ifsc code")
+                if len(self.__ifsccode) == 13:
+
+                    print("IFSC CODE verified")
+                else:
+                    raise ValueError("Inalid IFSC code \n check the code again")
         else:
-            raise ValueError("The number entered did not match pin number")
+            raise TypeError("Invalid Type Name")
+
+    def transcaction(self):
+            self.__raccno =int( input("Enter Reciver's Account number : "))
+            if len (self.__raccno) <=17:
+                    self.__reaccno1=int(input(" Re-Enter Reciver's Account number : "))
+                    if self.__reaccno1 == self.__raccno:
+                           print("Account Number verified")
+                    else:
+                         raise ValueError("Account Number mismatched Try again")
+            else:
+                raise ValueError("maximum number of limit crossed check and try agani")
+    def mn_to_transfer(self):
+            self.__amount = input("Enter amount to be transfered : ")
+            self.__pin = input("Enter your 4 digit pin to make transcaction : ")
+            if self.__pin == "0075":
+                print("your Transcaction is sucessfull \n")
+                
+
+            else:
+                print("Incorect pin!please try again")
+obj = gpay()
+obj.check_mobilenumber()
+obj.check_upi()
+obj1=bank()
+obj1.check_bank()
+obj1.pin_creation()
+obj2 = userdata()
+obj3 = payment()
+obj3.reciver_data("CIUB0000893")
+obj3.transcaction()
+obj3.mn_to_transfer()
+
